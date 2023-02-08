@@ -1,54 +1,30 @@
+import { classNames } from '../../helpers/utils.helpers';
+import { textConfig } from './config';
+
 type Props = {
   children?: React.ReactNode;
   className?: string;
-  size?:
-    | 'xs'
-    | 'sm'
-    | 'md'
-    | 'lg'
-    | 'xl'
-    | '2xl'
-    | '3xl'
-    | '4xl'
-    | '5xl'
-    | '6xl';
-  weight?:
-    | 'thin'
-    | 'extralight'
-    | 'light'
-    | 'normal'
-    | 'medium'
-    | 'semibold'
-    | 'bold'
-    | 'extrabold'
-    | 'black';
-  color?:
-    | 'gray'
-    | 'red'
-    | 'yellow'
-    | 'green'
-    | 'blue'
-    | 'indigo'
-    | 'purple'
-    | 'pink';
-  align?: 'left' | 'center' | 'right' | 'justify';
+  size?: keyof typeof textConfig.size;
+  weight?: keyof typeof textConfig.weight;
+  color?: keyof typeof textConfig.color;
+  align?: keyof typeof textConfig.align;
 };
 
 export const Heading = ({
   children,
-  className,
-  size,
-  weight,
-  color,
-  align,
+  className = '',
+  size = 'xl',
+  weight = 'normal',
+  color = 'black',
+  align = 'left',
 }: Props) => {
-  return (
-    <h1
-      className={`text-${size} font-${weight} text-${color}-700 ${
-        align ? `text-${align}` : ``
-      } ${className}`}
-    >
-      {children}
-    </h1>
+  const classnames = classNames(
+    textConfig.size[size],
+    textConfig.weight[weight],
+    textConfig.color[color],
+    textConfig.align[align],
+    className
   );
+
+  return <h1 className={classnames}>{children}</h1>;
 };

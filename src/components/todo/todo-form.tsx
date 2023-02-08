@@ -1,7 +1,7 @@
 import { FormikErrors } from 'formik';
 import { useState } from 'react';
 import * as yup from 'yup';
-import { convertISOStringToString } from '../../helpers/utils.helpers';
+import { convertISOStringToString } from '../../helpers/date.helpers';
 import { Input, VStack, Textarea, HStack } from '../common';
 import { Tag } from '../common/tag';
 

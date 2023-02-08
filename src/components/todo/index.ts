@@ -1,3 +1,3 @@
-import { TodoRow } from './todo-row';
+import { TodoList } from './todo-list';
 
-export { TodoRow };
+export { TodoList };

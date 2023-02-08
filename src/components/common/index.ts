@@ -7,6 +7,7 @@ import { Button } from './button';
 import { Checkbox } from './checkbox';
 import { Input } from './input';
 import { Textarea } from './textarea';
+import { Container } from './container';
 
 export {
   HStack,
@@ -18,4 +19,5 @@ export {
   Checkbox,
   Input,
   Textarea,
+  Container,
 };

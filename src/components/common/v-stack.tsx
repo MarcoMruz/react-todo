@@ -1,33 +1,33 @@
+import { classNames } from '../../helpers/utils.helpers';
+import { config, vstackConfig } from './config';
+
 type Props = {
   children?: React.ReactNode;
   className?: string;
-  spacing?: number;
-  rounded?: 'sm' | 'md' | 'lg' | 'full' | 'none';
-  shadow?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'inner' | 'none';
-  justify?: 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly';
-  align?: 'start' | 'end' | 'center' | 'baseline' | 'stretch';
+  spacing?: keyof typeof vstackConfig.spacing;
+  rounded?: keyof typeof config.rounded;
+  shadow?: keyof typeof config.shadow;
+  justify?: keyof typeof vstackConfig.justify;
+  align?: keyof typeof vstackConfig.align;
 };
 
 export const VStack = ({
   children,
-  className,
-  spacing,
-  rounded,
-  shadow,
-  justify,
-  align,
+  className = '',
+  spacing = 0,
+  rounded = 'none',
+  shadow = 'none',
+  justify = 'start',
+  align = 'start',
 }: Props) => {
-  return (
-    <div
-      className={`flex flex-col ${className}
-      ${spacing ? `space-y-${spacing}` : ``}
-      ${rounded ? `rounded-${rounded}` : ``}
-      ${shadow ? `shadow-${shadow}` : ``}
-      ${justify ? `justify-${justify}` : ``}
-      ${align ? `items-${align}` : ``}
-      `}
-    >
-      {children}
-    </div>
+  const classnames = classNames(
+    `flex flex-col`,
+    className,
+    vstackConfig.spacing[spacing],
+    vstackConfig.justify[justify],
+    vstackConfig.align[align],
+    config.rounded[rounded],
+    config.shadow[shadow]
   );
+  return <div className={classnames}>{children}</div>;
 };

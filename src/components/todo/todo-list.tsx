@@ -1,15 +1,17 @@
 import { Todo } from '../../models/Todo';
+import { VStack } from '../common';
 import { TodoRow } from './todo-row';
 
 type Props = {
   todos: Todo[];
+  className?: string;
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
 };
 
-export const TodoList = ({ todos, onToggle, onDelete }: Props) => {
+export const TodoList = ({ todos, className, onToggle, onDelete }: Props) => {
   return (
-    <div>
+    <VStack className={className}>
       {todos.map((todo) => (
         <TodoRow
           key={todo.id}
@@ -18,6 +20,6 @@ export const TodoList = ({ todos, onToggle, onDelete }: Props) => {
           onDelete={onDelete}
         />
       ))}
-    </div>
+    </VStack>
   );
 };
