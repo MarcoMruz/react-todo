@@ -7,17 +7,25 @@ type Props = {
   className?: string;
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
+  onEdit: (id: number) => void;
 };
 
-export const TodoList = ({ todos, className, onToggle, onDelete }: Props) => {
+export const TodoList = ({
+  todos,
+  className,
+  onToggle,
+  onDelete,
+  onEdit,
+}: Props) => {
   return (
-    <VStack className={className}>
+    <VStack className={className} spacing={5}>
       {todos.map((todo) => (
         <TodoRow
           key={todo.id}
           todo={todo}
           onToggle={onToggle}
           onDelete={onDelete}
+          onEdit={onEdit}
         />
       ))}
     </VStack>

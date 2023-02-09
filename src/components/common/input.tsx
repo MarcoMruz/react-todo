@@ -23,7 +23,8 @@ export const Input = ({
     inputConfig.variant[variant],
     inputConfig.inputSize[inputSize],
     invalid ? `input-error` : ``,
-    props.className || ``
+    props.className || ``,
+    'w-full'
   );
 
   return (

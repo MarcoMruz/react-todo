@@ -163,6 +163,7 @@ export const buttonConfig = {
     outline: 'btn-outline',
     active: 'btn-active',
     accent: 'btn-accent',
+    info: 'btn-info',
     neutral: '',
   },
   variant: {

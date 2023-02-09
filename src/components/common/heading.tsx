@@ -8,7 +8,7 @@ type Props = {
   weight?: keyof typeof textConfig.weight;
   color?: keyof typeof textConfig.color;
   align?: keyof typeof textConfig.align;
-};
+} & React.HTMLAttributes<HTMLHeadingElement>;
 
 export const Heading = ({
   children,
@@ -17,6 +17,7 @@ export const Heading = ({
   weight = 'normal',
   color = 'black',
   align = 'left',
+  ...props
 }: Props) => {
   const classnames = classNames(
     textConfig.size[size],
@@ -26,5 +27,9 @@ export const Heading = ({
     className
   );
 
-  return <h1 className={classnames}>{children}</h1>;
+  return (
+    <h1 className={classnames} {...props}>
+      {children}
+    </h1>
+  );
 };

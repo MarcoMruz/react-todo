@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { formatStringDateForDisplayWithTime } from '../../helpers/date.helpers';
 import { Todo } from '../../models/Todo';
 import {
   Button,
@@ -13,35 +15,39 @@ type Props = {
   todo: Todo;
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
+  onEdit: (id: number) => void;
 };
 
-export const TodoRow = ({ todo, onToggle, onDelete }: Props) => {
+export const TodoRow = ({ todo, onToggle, onDelete, onEdit }: Props) => {
   const { id, completed, title, deadline, description } = todo;
+
   return (
     <HStack
       align="center"
       spacing={5}
       className={`todo-row ${
         completed ? 'bg-green-300' : ''
-      } my-5 border border-slate-400 p-5`}
+      } my-5 border border-slate-400 p-5 w-full`}
       shadow="md"
       rounded="md"
     >
-      <Checkbox
-        isChecked={completed}
-        onChange={() => onToggle(id)}
-        size="md"
-        disabled
-      />
+      <Checkbox isChecked={completed} onChange={() => onToggle(id)} size="lg" />
       <VStack>
-        <Heading size="lg">{title}</Heading>
-        <Text color="green">{description}</Text>
+        <Link to={`/${id}`}>
+          <Heading size="lg">{title}</Heading>
+        </Link>
+        <Text color="slate">{description}</Text>
+        <Text color="gray" size="xs">
+          {formatStringDateForDisplayWithTime(deadline)}
+        </Text>
       </VStack>
 
       <Spacer />
 
-      <Button onClick={() => onDelete(id)}>Delete</Button>
-      <button className="btn btn-accent btn-outline">skap</button>
+      <Button onClick={() => onEdit(id)}>Edit</Button>
+      <Button onClick={() => onDelete(id)} colorScheme="danger">
+        Delete
+      </Button>
     </HStack>
   );
 };
