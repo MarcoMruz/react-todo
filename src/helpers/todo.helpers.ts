@@ -1,8 +1,18 @@
 import { Todo } from '../models/Todo';
 
-async function createTodoItem(todo: Todo): Promise<Todo> {
+export type CreateTodoInputPayload = {
+  title: string;
+  description?: string;
+  deadline?: string;
+  tags?: string[];
+  completed?: boolean;
+};
+
+export async function createTodoItem(
+  todo: CreateTodoInputPayload
+): Promise<Todo> {
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/todos`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/todo`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -20,10 +30,10 @@ async function createTodoItem(todo: Todo): Promise<Todo> {
   }
 }
 
-async function editTodoItem(todo: Todo): Promise<Todo> {
+export async function editTodoItem(todo: Partial<Todo>): Promise<Todo> {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/todos/${todo.id}`,
+      `${import.meta.env.VITE_API_URL}/todo/${todo.id}`,
       {
         method: 'PUT',
         headers: {
@@ -43,14 +53,11 @@ async function editTodoItem(todo: Todo): Promise<Todo> {
   }
 }
 
-async function deleteTodoItem(id: number): Promise<void> {
+export async function deleteTodoItem(id: number): Promise<void> {
   try {
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/todos/${id}`,
-      {
-        method: 'DELETE',
-      }
-    );
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/todo/${id}`, {
+      method: 'DELETE',
+    });
 
     if (!response.ok) {
       throw new Error('Could not delete todo item');
@@ -58,4 +65,15 @@ async function deleteTodoItem(id: number): Promise<void> {
   } catch (error) {
     return Promise.reject(error);
   }
+}
+
+export function truncateString(str: string | null = '', num: number): string {
+  if (str == null || str.trim() === '') {
+    return '';
+  }
+
+  if (str.length <= num) {
+    return str;
+  }
+  return str.slice(0, num) + '...';
 }

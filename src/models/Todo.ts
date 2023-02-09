@@ -6,7 +6,7 @@ export type Todo = {
   deadline?: string;
   createdAt: string;
   updatedAt: string;
-  username: string;
+  name: string;
   avatar: string;
   tags: string[];
 };

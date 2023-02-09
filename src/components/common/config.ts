@@ -229,3 +229,30 @@ export const tagConfig = {
     solid: '',
   },
 };
+
+export const avatarConfig = {
+  status: {
+    online: 'online',
+    offline: 'offline',
+    none: '',
+  },
+  size: {
+    xs: 'w-8',
+    sm: 'w-16',
+    md: 'w-20',
+    lg: 'w-32',
+  },
+  rounded: {
+    none: 'rounded-none',
+    sm: 'rounded-sm',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    full: 'rounded-full',
+  },
+  mask: {
+    squircle: 'mask mask-squircle',
+    hexagon: 'mask mask-hexagon',
+    triangle: 'mask mask-triangle',
+    none: '',
+  },
+};

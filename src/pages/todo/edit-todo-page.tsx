@@ -1,47 +1,24 @@
-import { useFormik } from 'formik';
-import { useParams } from 'react-router-dom';
-import * as yup from 'yup';
-import { FormValues, TodoForm } from '../../components/todo/todo-form';
-import useFetch from '../../hooks/use-fetch';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Heading, HStack, Spacer } from '../../components/common';
+import { EditTodoForm } from '../../components/todo';
+import { FormValues } from '../../components/todo/todo-form';
+import { editTodoItem } from '../../helpers/todo.helpers';
+import { useFetch } from '../../hooks';
 import { Todo } from '../../models/Todo';
 
-const validationSchema = yup.object().shape({
-  title: yup.string().required('Title is required'),
-  description: yup.string().notRequired(),
-  deadline: yup.date().notRequired(),
-  tags: yup.array().of(yup.string()).notRequired(),
-  completed: yup.boolean().notRequired(),
-});
-
-const INITIAL_VALUES: FormValues = {
-  title: '',
-  description: '',
-  deadline: '',
-  tags: [],
-  completed: false,
-};
-
 const EditTodo = () => {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { data, error, loading } = useFetch<Todo>(
-    `${import.meta.env.VITE_API_URL}/todos/${id}`,
+    `${import.meta.env.VITE_API_URL}/todo/${id}`,
     'We could not find the todo you are looking for.'
   );
-  const {
-    errors,
-    values,
-    handleSubmit,
-    resetForm,
-    handleChange,
-    setFieldValue,
-  } = useFormik<FormValues>({
-    initialValues: data || INITIAL_VALUES,
-    validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-    },
-    validateOnMount: false,
-  });
+
+  const handleOnTodoEdit = (values: FormValues) => {
+    editTodoItem(values).then(() => {
+      navigate(`/`);
+    });
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -52,14 +29,25 @@ const EditTodo = () => {
   }
 
   return (
-    <TodoForm
-      errors={errors}
-      onChange={handleChange}
-      onSetFieldValue={setFieldValue}
-      onSubmit={handleSubmit}
-      onReset={resetForm}
-      values={values}
-    />
+    <div className="w-1/2 mx-auto my-10">
+      <Heading
+        size="5xl"
+        align="center"
+        color="blue"
+        weight="thin"
+        className="mb-2"
+      >
+        Currently editing <strong>{data.title}</strong>
+      </Heading>
+
+      <EditTodoForm
+        data={data}
+        onSubmit={(values) => {
+          handleOnTodoEdit(values);
+        }}
+        onBackClick={() => navigate(-1)}
+      />
+    </div>
   );
 };
 

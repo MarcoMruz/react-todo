@@ -1,5 +1,5 @@
-import React from "react";
-import { config } from "./modal.config";
+import React from 'react';
+import { config } from '../components/common/modal/modal.config';
 
 type ModalStyleProps = {
   size?: keyof typeof config.size;
@@ -9,14 +9,14 @@ type ModalStyleProps = {
 };
 
 const ModalContext = React.createContext({
-  size: "md" as keyof typeof config.size,
+  size: 'md' as keyof typeof config.size,
   closeOnOverlayClick: true,
   onClose: () => {},
 });
 
 function ModalProvider({
   children,
-  size = "md",
+  size = 'md',
   closeOnOverlayClick,
   onClose,
 }: ModalStyleProps) {

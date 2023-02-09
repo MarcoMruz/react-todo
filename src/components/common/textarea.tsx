@@ -19,6 +19,7 @@ export const Textarea = ({
 }: Props) => {
   const classnames = classNames(
     `textarea`,
+    'w-full',
     textareaConfig.variant[variant],
     textareaConfig.size[size],
     invalid ? `textarea-error` : ``,

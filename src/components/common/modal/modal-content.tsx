@@ -4,7 +4,7 @@ import { HStack } from '../h-stack';
 import { Spacer } from '../spacer';
 import { VStack } from '../v-stack';
 import { config } from './modal.config';
-import { useModalProps } from './use-modal-props';
+import { useModalProps } from '../../../hooks/use-modal-props';
 
 export function ModalHeader({ children }: { children?: React.ReactNode }) {
   return <div className="border-b border-b-slate-200 w-full">{children}</div>;
@@ -18,7 +18,7 @@ export function ModalBody({ children }: { children?: React.ReactNode }) {
 
 export function ModalFooter({ children }: { children?: React.ReactNode }) {
   return (
-    <HStack>
+    <HStack align="center">
       <Spacer />
       {children}
     </HStack>
@@ -61,8 +61,6 @@ export function ModalContent({ children }: { children?: React.ReactNode }) {
 
   return (
     <VStack
-      align="start"
-      justify="start"
       className={`absolute sm:max-h-[80%] rounded-lg bg-white p-4 h-full md:h-auto ${config.size[size]}`}
     >
       {CloseButton != null && CloseButton}

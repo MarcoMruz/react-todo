@@ -1,4 +1,4 @@
-import { useModalProps } from "./use-modal-props";
+import { useModalProps } from '../../../hooks/use-modal-props';
 
 export function ModalOverlay() {
   const { onClose, closeOnOverlayClick } = useModalProps();

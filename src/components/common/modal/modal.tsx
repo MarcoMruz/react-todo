@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef, HTMLAttributes, useEffect } from 'react';
 import { config } from './modal.config';
-import { ModalProvider } from './use-modal-props';
+import { ModalProvider } from '../../../hooks/use-modal-props';
 
 export type ModalProps = {
   isOpen: boolean;

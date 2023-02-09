@@ -20,7 +20,7 @@ export const HStack = ({
   rounded = 'none',
   shadow = 'none',
   justify = 'start',
-  align = 'start',
+  align = 'center',
 }: Props) => {
   const classnames = classNames(
     `flex flex-row`,
